@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --shumai-bg: #0e0100;
+  --shumai-card: #1e0800;
+  --shumai-primary: #ff4002;
+  --shumai-secondary: #ff7a1b;
+  --shumai-tertiary: #ff9815;
+  --shumai-text: #fffbff;
+  --shumai-muted: #ffd7cd;
+}
+
+body {
+  background: var(--shumai-bg);
+  color: var(--shumai-text);
+  font-family: Arial, Helvetica, sans-serif;
+}

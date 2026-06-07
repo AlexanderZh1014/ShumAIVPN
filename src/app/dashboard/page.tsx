@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type VpnAccount = {
@@ -24,7 +25,8 @@ const dictionary = {
     welcomeTo: "Welcome to",
     loggedInAs: "Logged in as",
     vpnCredentials: "VPN Credentials",
-    credentialDesc: "Use these credentials in your device VPN settings.",
+    credentialDesc:
+      "Use these credentials in your device VPN settings. Before each connection, check whether the server, type, password, or Secret has changed.",
     description: "Description",
     server: "Server",
     type: "Type",
@@ -54,6 +56,7 @@ const dictionary = {
     note1: "Use mobile data when testing from inside the same network.",
     note2: "Do not share your password or Secret.",
     note3: "If connection fails, check VPN type and Secret first.",
+    note4: "Before connecting each time, confirm the connection information on this page is still current.",
   },
 
   zh: {
@@ -62,7 +65,8 @@ const dictionary = {
     welcomeTo: "欢迎使用",
     loggedInAs: "当前登录账号",
     vpnCredentials: "VPN 连接信息",
-    credentialDesc: "请在设备的 VPN 设置中填写以下连接信息。",
+    credentialDesc:
+      "请在设备的 VPN 设置中填写以下连接信息。每次连接前，请先确认服务器、类型、密码或共享密钥是否有变更。",
     description: "描述",
     server: "服务器",
     type: "类型",
@@ -92,6 +96,7 @@ const dictionary = {
     note1: "如果你在同一个家庭网络内测试，建议使用手机蜂窝数据。",
     note2: "请勿分享你的密码或共享密钥。",
     note3: "如果连接失败，请优先检查 VPN 类型和共享密钥。",
+    note4: "每次连接前，请确认本页显示的连接信息仍然是最新的。",
   },
 };
 
@@ -237,10 +242,10 @@ export default function DashboardPage() {
   const rows = [
     [t.description, vpn?.vpnUsername || ""],
     [t.server, vpn?.server || ""],
-    [t.type, "L2TP/IPsec"],
+    [t.type, "L2TP"],
     [t.username, vpn?.vpnUsername || ""],
     [t.password, vpn?.vpnPassword || ""],
-    [t.secret, "ShumAI2026"],
+    [t.secret, vpn?.secret || ""],
     [
       t.expiresAt,
       vpn?.expiresAt
@@ -269,7 +274,7 @@ export default function DashboardPage() {
           justify-between
         "
       >
-        <a
+        <Link
           href="/"
           className="
             text-2xl
@@ -279,7 +284,7 @@ export default function DashboardPage() {
         >
           ShumAI
           <span className="text-[#ff4002]">VPN</span>
-        </a>
+        </Link>
 
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2 text-sm">
@@ -646,6 +651,7 @@ export default function DashboardPage() {
                   <li>{t.note1}</li>
                   <li>{t.note2}</li>
                   <li>{t.note3}</li>
+                  <li>{t.note4}</li>
                 </ul>
               </div>
             </div>

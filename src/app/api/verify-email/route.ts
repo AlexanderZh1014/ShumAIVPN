@@ -102,10 +102,12 @@ export async function GET(request: Request) {
             vpnPassword,
 
             server:
-              "vpn763499306.softether.net",
+              process.env.SOFTETHER_PUBLIC_HOST ||
+              "vpn.shumaivpn.com",
 
             secret:
-              "your_pre_shared_key",
+              process.env.SOFTETHER_IPSEC_SECRET ||
+              "ShumAI2026",
 
             status:
               "active",

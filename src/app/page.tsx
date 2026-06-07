@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Footer from "../components/Footer";
 import { useState } from "react";
 import { dictionary } from "../lib/dictionary";
@@ -63,8 +64,8 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#0e0100] text-[#fffbff]">
-      <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-  <a href="/" className="flex items-center gap-3">
+      <nav className="homepage-rise relative mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
+  <Link href="/" className="flex items-center gap-3">
     <Image
       src="/ShumaiLogo.png"
       alt="ShumAI Logo"
@@ -76,7 +77,7 @@ export default function HomePage() {
     <div className="text-xl font-bold tracking-tight sm:text-2xl">
       ShumAI<span className="text-[#ff4002]">VPN</span>
     </div>
-  </a>
+  </Link>
 
   <div className="hidden items-center gap-5 text-sm md:flex">
     <button
@@ -109,20 +110,26 @@ export default function HomePage() {
 
   <button
     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-    className="rounded-full border border-[#ff7a1b]/30 px-4 py-2 text-sm text-[#ffd7cd] md:hidden"
+    aria-expanded={mobileMenuOpen}
+    aria-label="Open navigation menu"
+    className="shrink-0 rounded-full border border-[#ff7a1b]/30 px-4 py-2 text-sm text-[#ffd7cd] md:hidden"
   >
     Menu
   </button>
 
   {mobileMenuOpen && (
-    <div className="absolute right-6 top-20 z-50 w-52 rounded-2xl border border-[#ff7a1b]/30 bg-[#1e0800] p-4 shadow-2xl shadow-orange-950/40 md:hidden">
-      <div className="flex flex-col gap-4 text-sm">
+    <div className="fixed left-4 right-4 top-20 z-50 rounded-2xl border border-[#ff7a1b]/30 bg-[#1e0800]/95 p-3 shadow-2xl shadow-orange-950/50 backdrop-blur md:hidden">
+      <div className="flex flex-col gap-1 text-sm">
         <button
           onClick={() => {
             setLocale("en");
             setMobileMenuOpen(false);
           }}
-          className={locale === "en" ? "text-left text-white" : "text-left text-[#ffd7cd]"}
+          className={`min-h-11 rounded-xl px-3 text-left ${
+            locale === "en"
+              ? "bg-[#ff4002]/10 text-white"
+              : "text-[#ffd7cd] hover:bg-[#ff7a1b]/10 hover:text-white"
+          }`}
         >
           English
         </button>
@@ -132,23 +139,29 @@ export default function HomePage() {
             setLocale("zh");
             setMobileMenuOpen(false);
           }}
-          className={locale === "zh" ? "text-left text-white" : "text-left text-[#ffd7cd]"}
+          className={`min-h-11 rounded-xl px-3 text-left ${
+            locale === "zh"
+              ? "bg-[#ff4002]/10 text-white"
+              : "text-[#ffd7cd] hover:bg-[#ff7a1b]/10 hover:text-white"
+          }`}
         >
           简体中文
         </button>
 
-        <div className="h-px bg-[#ff7a1b]/20" />
+        <div className="my-2 h-px bg-[#ff7a1b]/20" />
 
         <a
           href="/login"
-          className="text-[#ffd7cd] hover:text-white"
+          onClick={() => setMobileMenuOpen(false)}
+          className="flex min-h-11 items-center rounded-xl px-3 text-[#ffd7cd] hover:bg-[#ff7a1b]/10 hover:text-white"
         >
           {t.login}
         </a>
 
         <a
           href="/register"
-          className="rounded-xl bg-[#ff4002] px-4 py-3 text-center font-semibold text-white hover:bg-[#ff562a]"
+          onClick={() => setMobileMenuOpen(false)}
+          className="flex min-h-11 items-center justify-center rounded-xl bg-[#ff4002] px-4 text-center font-semibold text-white hover:bg-[#ff562a]"
         >
           {t.getStarted}
         </a>
@@ -156,7 +169,7 @@ export default function HomePage() {
         <a
           href="#pricing"
           onClick={() => setMobileMenuOpen(false)}
-          className="text-[#ffd7cd] hover:text-white"
+          className="flex min-h-11 items-center rounded-xl px-3 text-[#ffd7cd] hover:bg-[#ff7a1b]/10 hover:text-white"
         >
           {t.pricing}
         </a>
@@ -167,23 +180,23 @@ export default function HomePage() {
 
       <section className="relative mx-auto flex min-h-[85vh] max-w-7xl items-center px-6">
         <div className="absolute inset-0 -z-10">
-          <div className="absolute left-1/2 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-[#ff4002]/30 blur-3xl" />
-          <div className="absolute right-20 bottom-20 h-72 w-72 rounded-full bg-[#ff9815]/20 blur-3xl" />
+          <div className="homepage-glow-slow absolute left-1/2 top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-[#ff4002]/30 blur-3xl" />
+          <div className="homepage-glow-fast absolute right-20 bottom-20 h-72 w-72 rounded-full bg-[#ff9815]/20 blur-3xl" />
         </div>
 
         <div className="max-w-3xl">
-          <div className="mb-6 inline-flex rounded-full border border-[#ff7a1b]/40 bg-[#1e0800]/80 px-4 py-2 text-sm text-[#ffd7cd]">
+          <div className="homepage-rise homepage-delay-1 mb-6 inline-flex rounded-full border border-[#ff7a1b]/40 bg-[#1e0800]/80 px-4 py-2 text-sm text-[#ffd7cd]">
             {t.heroBadge}
           </div>
 
-          <h1 className="text-6xl font-bold leading-tight tracking-tight md:text-8xl">
+          <h1 className="homepage-rise homepage-delay-2 text-6xl font-bold leading-tight tracking-tight md:text-8xl">
             ShumAI VPN
-            <span className="block bg-gradient-to-r from-[#ff4002] via-[#ff7a1b] to-[#ff9815] bg-clip-text text-transparent">
+            <span className="homepage-gradient-text block bg-gradient-to-r from-[#ff4002] via-[#ff7a1b] to-[#ff9815] bg-clip-text text-transparent">
               {t.heroTitle}
             </span>
           </h1>
 
-          <div className="mt-8 max-w-2xl">
+          <div className="homepage-rise homepage-delay-3 mt-8 max-w-2xl">
             <p className="text-xl leading-8 text-[#ffd7cd]">{t.heroDesc}</p>
 
             <div className="mt-5 inline-flex items-center rounded-full border border-[#ff4002]/30 bg-[#ff4002]/10 px-4 py-2 text-sm font-medium text-[#ffb08f]">
@@ -191,17 +204,17 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="homepage-rise homepage-delay-4 mt-10 flex flex-wrap gap-4">
             <a
               href="/register"
-              className="rounded-2xl bg-[#ff4002] px-7 py-4 font-semibold text-white shadow-xl shadow-orange-950/50 hover:bg-[#ff562a]"
+              className="homepage-button rounded-2xl bg-[#ff4002] px-7 py-4 font-semibold text-white shadow-xl shadow-orange-950/50 hover:bg-[#ff562a]"
             >
               {t.createAccount}
             </a>
 
             <a
               href="/login"
-              className="rounded-2xl border border-[#ff7a1b]/40 bg-[#1e0800] px-7 py-4 font-semibold text-[#ffede9] hover:border-[#ff4002]"
+              className="homepage-button rounded-2xl border border-[#ff7a1b]/40 bg-[#1e0800] px-7 py-4 font-semibold text-[#ffede9] hover:border-[#ff4002]"
             >
               {t.loginDashboard}
             </a>
@@ -215,7 +228,7 @@ export default function HomePage() {
             ].map(([title, desc]) => (
               <div
                 key={title}
-                className="rounded-2xl border border-[#ff7a1b]/20 bg-[#1e0800]/80 p-5"
+                className="homepage-card rounded-2xl border border-[#ff7a1b]/20 bg-[#1e0800]/80 p-5"
               >
                 <h3 className="font-semibold text-[#fffbff]">{title}</h3>
                 <p className="mt-2 text-sm text-[#ffd7cd]">{desc}</p>
@@ -245,9 +258,9 @@ export default function HomePage() {
           ].map(([title, desc]) => (
             <div
               key={title}
-              className="rounded-3xl border border-[#ff7a1b]/20 bg-[#1e0800]/90 p-6 shadow-2xl shadow-orange-950/20"
+              className="homepage-card rounded-3xl border border-[#ff7a1b]/20 bg-[#1e0800]/90 p-6 shadow-2xl shadow-orange-950/20"
             >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ff4002]/10 text-xl text-[#ff9815]">
+              <div className="homepage-symbol mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ff4002]/10 text-xl text-[#ff9815]">
                 ✦
               </div>
 
@@ -275,7 +288,7 @@ export default function HomePage() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`rounded-3xl border p-7 shadow-2xl shadow-orange-950/30 ${
+              className={`homepage-card rounded-3xl border p-7 shadow-2xl shadow-orange-950/30 ${
                 plan.highlighted
                   ? "border-[#ff4002] bg-[#2a0d00]"
                   : "border-[#ff7a1b]/20 bg-[#1e0800]/90"
@@ -298,7 +311,7 @@ export default function HomePage() {
 
               <a
                 href={plan.href}
-                className={`mt-8 block rounded-2xl px-5 py-3 text-center font-semibold ${
+                className={`homepage-button mt-8 block rounded-2xl px-5 py-3 text-center font-semibold ${
                   plan.highlighted
                     ? "bg-[#ff4002] text-white hover:bg-[#ff562a]"
                     : "border border-[#ff7a1b]/30 text-[#ffede9] hover:border-[#ff4002]"

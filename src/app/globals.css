@@ -17,3 +17,135 @@ body {
   color: var(--shumai-text);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.homepage-rise {
+  animation: homepage-rise 700ms ease both;
+}
+
+.homepage-delay-1 {
+  animation-delay: 80ms;
+}
+
+.homepage-delay-2 {
+  animation-delay: 160ms;
+}
+
+.homepage-delay-3 {
+  animation-delay: 240ms;
+}
+
+.homepage-delay-4 {
+  animation-delay: 320ms;
+}
+
+.homepage-glow-slow {
+  animation: homepage-glow 9s ease-in-out infinite alternate;
+}
+
+.homepage-glow-fast {
+  animation: homepage-glow 7s ease-in-out infinite alternate-reverse;
+}
+
+.homepage-gradient-text {
+  background-size: 180% 100%;
+  animation: homepage-gradient 8s ease-in-out infinite;
+}
+
+.homepage-card {
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.homepage-card:hover {
+  border-color: rgb(255 122 27 / 0.5);
+  box-shadow: 0 24px 70px rgb(80 22 0 / 0.36);
+  transform: translateY(-4px);
+}
+
+.homepage-button {
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.homepage-button:hover {
+  box-shadow: 0 18px 44px rgb(255 64 2 / 0.24);
+  transform: translateY(-2px);
+}
+
+.homepage-button:active {
+  transform: translateY(0);
+}
+
+.homepage-symbol {
+  animation: homepage-symbol 3.8s ease-in-out infinite;
+}
+
+@keyframes homepage-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homepage-glow {
+  from {
+    opacity: 0.72;
+    transform: translate3d(-2%, 0, 0) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(2%, -2%, 0) scale(1.06);
+  }
+}
+
+@keyframes homepage-gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes homepage-symbol {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage-rise,
+  .homepage-glow-slow,
+  .homepage-glow-fast,
+  .homepage-gradient-text,
+  .homepage-symbol {
+    animation: none;
+  }
+
+  .homepage-card,
+  .homepage-card:hover,
+  .homepage-button,
+  .homepage-button:hover,
+  .homepage-button:active {
+    transition: none;
+    transform: none;
+  }
+}
